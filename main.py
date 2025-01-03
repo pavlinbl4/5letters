@@ -1,48 +1,83 @@
+from complete_word_app import get_letter_settings
 from nouns_from_csv import read_column
-from spacy_tool import lemmatize_words_list
+
+dictionary = read_column('nouns_5.csv')
 
 
-def find_words_with_letters(dictionary, word_length, letter_positions):
-    """
-    Находит слова в словаре заданной длины, содержащие указанные буквы на заданных позициях.
+def find_words_with_letters(letter_positions, unused_letters, used_letters_no_position):
+    # список возможных слов
+    possible_words = []
 
-    :param dictionary: список слов
-    :param word_length: длина искомых слов
-    :param letter_positions: словарь {позиция: буква}, где позиция - индекс (начиная с 0)
-    :return: список слов, подходящих под условия
-    """
-    result = []
-
+    # перебираю слова в словаре
     for word in dictionary:
-        # Проверяем длину слова
-        if len(word) != word_length:
-            continue
-        # Проверяем буквы на заданных позициях
         match = True
-        for position, letter in letter_positions.items():
 
-            # if position < 0 or position >= word_length or word[position] != letter:
-            if word[position] != letter:
+        # проверяю слово на буквы, которых не может быть в слове
+        for letter in word:
+            if letter in unused_letters:
                 match = False
                 break
 
+        # проверяю слово на наличие в нем угаданных букв
         if match:
-            result.append(word)
+            count = 0
+            for letter in used_letters_no_position:
+                if letter in word:
+                    count += 1
+            if count < len(used_letters_no_position):
+                match = False
 
-    return result
+        # проверю слово на наличие в нем угаданной буквы с известной позицией в слове
+        if match:
+            for position, letter in letter_positions.items():
+                # if position < 0 or position >= word_length or word[position] != letter:
+                if word[position] != letter:
+                    match = False
+                    break
+
+        if match:
+            possible_words.append(word)
+
+    # возвращаю список возможный слов
+    return possible_words
 
 
 if __name__ == '__main__':
-    # Пример использования:
-    # Загружаем словарь из текстового файла
-    # with open("/Users/evgeniy/Documents/russian.txt", encoding="utf-8") as f:
-    #     dictionary = [line.strip() for line in f]
 
-    dictionary = read_column('nouns.csv')
+    check_new_word = get_letter_settings()
 
-    word_length = 5
-    letter_positions = {4: 'р', 1: 'у', 3: 'о', }
+    # словарь угаданных с позицией букв
+    letter_positions = {}
 
-    result = find_words_with_letters(dictionary, word_length, letter_positions)
-    print([word for word in lemmatize_words_list(result) if len(word) == 5])
-    # print("Найденные слова:", result)
+    # множество букв, которых не может быть в слове
+    unused_letters = set()
+
+    # множество букв, который есть в слове
+    used_letters_no_position = set()
+
+
+    # цикл для вызова графического интерфейса
+    stop_kran = 1
+    while stop_kran != ' ':
+        new_letter_positions = check_new_word['result_dict']
+        new_unused_letters = check_new_word['no_list']
+        new_used_letters = check_new_word['yes_list']
+
+        letter_positions.update(new_letter_positions)
+
+        unused_letters.update(new_unused_letters)
+
+        used_letters_no_position.update(new_used_letters)
+        unused_letters = unused_letters.difference(used_letters_no_position)
+
+        result = find_words_with_letters(letter_positions, unused_letters, used_letters_no_position)
+
+        print(f'{unused_letters  = }')
+        print(f'{used_letters_no_position = }')
+        print(f'{letter_positions = }')
+        print("ВОЗМОЖНЫЕ ВАРИАНТЫ СЛОВ")
+        print([word for word in result])
+        stop_kran = input('Чтоб продолжать нажмите любую клавишу\n'
+                          'Для остановки - введите пробел\n ')
+
+        check_new_word = get_letter_settings()

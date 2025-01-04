@@ -1,3 +1,7 @@
+"""
+программа на PyQt6 для выбора файла на компьютере
+"""
+
 import sys
 
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QVBoxLayout, QWidget

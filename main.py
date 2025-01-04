@@ -1,4 +1,4 @@
-from complete_word_app import get_letter_settings
+# from complete_word_app import get_letter_settings
 from nouns_from_csv import read_column
 
 dictionary = read_column('nouns_5.csv')

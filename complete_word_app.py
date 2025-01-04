@@ -71,6 +71,7 @@ class WordInputWindow(QWidget):
                                                          used_letters_no_position,
                                                          )
                 print(f'{type(used_letters_no_position) = }')
+                print(f'{type(unused_letters) = }')
                 print([word for word in possible_words])
 
 
@@ -188,7 +189,7 @@ class LetterSelectionWindow(QDialog):
     def get_results(self):
         """Возвращает результаты выбора."""
         return {
-            'yes_list': list(self.yes_set),
+            'yes_list': self.yes_set,
             'no_list': self.no_list,
             'result_dict': self.result_dict
         }

@@ -182,7 +182,8 @@ class LetterSelectionWindow(QDialog):
         results = self.get_results()
         if self.callback:
             self.callback(results)
-        self.close()
+        # self.close()
+        self.accept()  # Закрывает окно с результатом QDialog.Accepted
         return results
 
     def reset_choices(self):

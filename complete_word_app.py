@@ -59,12 +59,30 @@ class WordInputWindow(QWidget):
             dialog = LetterSelectionWindow(word)
             if dialog.exec_():  # Ждем завершения окна
                 result = dialog.get_results()  # Получаем результаты через метод
+
+
+                letter_positions = result['result_dict']
+                used_letters_no_position = result['yes_list']
+                unused_letters = result['no_list']
+                # исключаю попадения угаданный букв в коллекцию неиспользуемых букв
+                unused_letters = unused_letters.difference(used_letters_no_position)
+                possible_words = find_words_with_letters(letter_positions,
+                                                         unused_letters,
+                                                         used_letters_no_position,
+                                                         )
+                print(f'{type(used_letters_no_position) = }')
+                print([word for word in possible_words])
+
+
+
+
                 QMessageBox.information(
                     self,
                     "Результат",
                     f"Yes set: {result['yes_list']}\n"
                     f"No List: {result['no_list']}\n"
                     f"Result Dict: {result['result_dict']}"
+                    f"Possible words \n {[word for word in possible_words]}"
                 )
 
             else:
@@ -147,7 +165,7 @@ class LetterSelectionWindow(QDialog):
             if letter not in self.no_list:  # Добавляем в no_list
                 self.no_list.append(letter)
 
-        print(f"yes_set={self.yes_set}, no_list={self.no_list}")  # Лог
+        # print(f"yes_set={self.yes_set}, no_list={self.no_list}")  # Лог
 
     def update_number(self, row, value):
         """Обновляет словарь при выборе числового значения."""

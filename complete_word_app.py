@@ -1,9 +1,11 @@
 import sys
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QLineEdit, QPushButton,
     QVBoxLayout, QComboBox, QTableWidget, QTableWidgetItem, QMessageBox
 )
+
 
 class WordInputWindow(QWidget):
     def __init__(self, callback=None):
@@ -14,6 +16,11 @@ class WordInputWindow(QWidget):
         self.word = None  # Для сохранения введённого слова
         self.init_ui()
 
+        self.label = None  # Определение атрибута
+        self.word_input = None
+        self.submit_button = None
+        self.reset_button = None
+
     def init_ui(self):
         layout = QVBoxLayout()
 
@@ -22,6 +29,7 @@ class WordInputWindow(QWidget):
         self.label.setAlignment(Qt.AlignCenter)
         self.label.setStyleSheet("font-size: 18px;")
         layout.addWidget(self.label)
+
 
         # Поле ввода
         self.word_input = QLineEdit(self)
@@ -67,9 +75,13 @@ class LetterSelectionWindow(QWidget):
         self.result_dict = {}
 
         self.init_ui()
+        self.table = None
+        self.submit_button = None
+        self.reset_button = None
 
     def init_ui(self):
         layout = QVBoxLayout()
+
 
         # Таблица
         self.table = QTableWidget(len(self.word), 3, self)
@@ -181,6 +193,5 @@ def get_letter_settings():
     selection_window.show()
     app.exec_()
     return results
-
 
 # Удален блок if __name__ == "__main__"

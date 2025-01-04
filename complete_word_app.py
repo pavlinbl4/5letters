@@ -16,11 +16,6 @@ class WordInputWindow(QWidget):
         self.word = None  # Для сохранения введённого слова
         self.init_ui()
 
-        self.label = None  # Определение атрибута
-        self.word_input = None
-        self.submit_button = None
-        self.reset_button = None
-
     def init_ui(self):
         layout = QVBoxLayout()
 
@@ -29,7 +24,6 @@ class WordInputWindow(QWidget):
         self.label.setAlignment(Qt.AlignCenter)
         self.label.setStyleSheet("font-size: 18px;")
         layout.addWidget(self.label)
-
 
         # Поле ввода
         self.word_input = QLineEdit(self)
@@ -75,13 +69,9 @@ class LetterSelectionWindow(QWidget):
         self.result_dict = {}
 
         self.init_ui()
-        self.table = None
-        self.submit_button = None
-        self.reset_button = None
 
     def init_ui(self):
         layout = QVBoxLayout()
-
 
         # Таблица
         self.table = QTableWidget(len(self.word), 3, self)

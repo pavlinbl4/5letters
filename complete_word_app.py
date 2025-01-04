@@ -197,28 +197,29 @@ class LetterSelectionWindow(QDialog):
             self.no_list.append(self.word[row])  # Добавляем букву обратно в no_list
 
 
-def process_results(results):
-    """Пример обработки полученных результатов"""
-    print("\nПолученные результаты:")
-    print(f"Буквы, помеченные как 'Yes': {results['yes_list']}")
-    print(f"Буквы, помеченные как 'No': {results['no_list']}")
-    print("Позиции букв:")
-    for pos, letter in sorted(results['result_dict'].items()):
-        print(f"Позиция {pos + 1}: буква '{letter}'")
-    letter_positions = results['result_dict']
-    used_letters_no_position = results['yes_list']
-    unused_letters = results['no_list']
-    # исключаю попадения угаданный букв в коллекцию неиспользуемых букв
-    unused_letters = unused_letters.difference(used_letters_no_position)
-    possible_words = find_words_with_letters(letter_positions,
-                                             unused_letters,
-                                             used_letters_no_position,
-                                             )
-    print([word for word in possible_words])
+# def process_results(results):
+#     """Пример обработки полученных результатов"""
+#     print("\nПолученные результаты:")
+#     print(f"Буквы, помеченные как 'Yes': {results['yes_list']}")
+#     print(f"Буквы, помеченные как 'No': {results['no_list']}")
+#     print("Позиции букв:")
+#     for pos, letter in sorted(results['result_dict'].items()):
+#         print(f"Позиция {pos + 1}: буква '{letter}'")
+#     letter_positions = results['result_dict']
+#     used_letters_no_position = results['yes_list']
+#     unused_letters = results['no_list']
+#     # исключаю попадения угаданный букв в коллекцию неиспользуемых букв
+#     unused_letters = unused_letters.difference(used_letters_no_position)
+#     possible_words = find_words_with_letters(letter_positions,
+#                                              unused_letters,
+#                                              used_letters_no_position,
+#                                              )
+#     print([word for word in possible_words])
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    main_window = WordInputWindow(callback=process_results)
+    # main_window = WordInputWindow(callback=process_results)
+    main_window = WordInputWindow()
     main_window.show()
     sys.exit(app.exec_())

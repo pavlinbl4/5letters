@@ -14,6 +14,12 @@ class WordInputWindow(QWidget):
         self.setWindowTitle("Введите слово")
         self.setFixedSize(500, 300)
         self.word = None  # Для сохранения введённого слова
+
+        self.label = None  # Определение атрибута
+        self.word_input = None
+        self.submit_button = None
+        self.reset_button = None
+
         self.init_ui()
 
     def init_ui(self):
@@ -59,6 +65,7 @@ class WordInputWindow(QWidget):
 class LetterSelectionWindow(QWidget):
     def __init__(self, word, callback=None):
         super().__init__()
+
         self.callback = callback
         self.setWindowTitle("Настройка букв")
         self.setFixedSize(600, 500)
@@ -67,6 +74,10 @@ class LetterSelectionWindow(QWidget):
         self.yes_set = set()
         self.no_list = []
         self.result_dict = {}
+
+        self.table = None
+        self.submit_button = None
+        self.reset_button = None
 
         self.init_ui()
 

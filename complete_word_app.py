@@ -1,4 +1,5 @@
 import sys
+
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QLineEdit, QPushButton,
@@ -53,18 +54,15 @@ class WordInputWindow(QWidget):
         word = self.word_input.text().strip()
         if len(word) != 5:
             QMessageBox.critical(self, "Ошибка", "Слово должно состоять ровно из 5 букв!")
-        # else:
-        #     self.close()
-        #     self.second_window = LetterSelectionWindow(word, self.callback)
-        #     self.second_window.show()
+
         else:
             dialog = LetterSelectionWindow(word)
             if dialog.exec_():  # Ждем завершения окна
-                result = dialog.result
+                result = dialog.get_results()  # Получаем результаты через метод
                 QMessageBox.information(
                     self,
                     "Результат",
-                    f"Yes List: {result['yes_list']}\n"
+                    f"Yes set: {result['yes_list']}\n"
                     f"No List: {result['no_list']}\n"
                     f"Result Dict: {result['result_dict']}"
                 )
@@ -85,7 +83,7 @@ class LetterSelectionWindow(QDialog):
 
         self.word = word
         self.yes_set = set()
-        self.no_list = set() # Инициализируем пустую коллекцию
+        self.no_list = set()  # Инициализируем пустую коллекцию
         self.result_dict = {}
 
         self.init_ui()
@@ -214,7 +212,7 @@ def process_results(results):
     unused_letters = unused_letters.difference(used_letters_no_position)
     possible_words = find_words_with_letters(letter_positions,
                                              unused_letters,
-                                             used_letters_no_position ,
+                                             used_letters_no_position,
                                              )
     print([word for word in possible_words])
 

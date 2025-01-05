@@ -6,7 +6,7 @@ from PyQt5.QtWidgets import (
     QVBoxLayout, QComboBox, QTableWidget, QTableWidgetItem, QMessageBox, QDialog
 )
 
-from main import find_words_with_letters
+from word_processor_for_5letters import find_words_with_letters
 
 
 class WordInputWindow(QWidget):

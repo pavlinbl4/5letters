@@ -1,4 +1,3 @@
-# from complete_word_app import get_letter_settings
 from nouns_from_csv import read_column
 
 dictionary = read_column('nouns_5.csv')
@@ -40,6 +39,5 @@ def find_words_with_letters(letter_positions, unused_letters, used_letters_no_po
 
     # возвращаю список возможный слов
     return possible_words
-
 
 # удален блок main

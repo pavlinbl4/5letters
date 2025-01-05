@@ -136,8 +136,8 @@ class LetterSelectionWindow(QWidget):
 
     def get_results(self):
         return {
-            'yes_list': list(self.yes_set),
-            'no_list': self.no_list,
+            'yes_set': list(self.yes_set),
+            'no_set': self.no_list,
             'result_dict': self.result_dict
         }
 

@@ -177,7 +177,7 @@ class LetterSelectionWindow(QDialog):
         elif choice == "No":
             self.yes_set.discard(letter)  # Убираем из yes_set
             if letter not in self.no_set:  # Добавляем в no_list
-                self.no_set.append(letter)
+                self.no_set.add(letter)
 
         # print(f"yes_set={self.yes_set}, no_list={self.no_list}")  # Лог
 
@@ -232,26 +232,6 @@ class LetterSelectionWindow(QDialog):
             yes_no_box.setCurrentText("No")
             number_box.setCurrentText("0")
             self.no_set.append(self.word[row])  # Добавляем букву обратно в no_list
-
-
-# def process_results(results):
-#     """Пример обработки полученных результатов"""
-#     print("\nПолученные результаты:")
-#     print(f"Буквы, помеченные как 'Yes': {results['yes_list']}")
-#     print(f"Буквы, помеченные как 'No': {results['no_list']}")
-#     print("Позиции букв:")
-#     for pos, letter in sorted(results['result_dict'].items()):
-#         print(f"Позиция {pos + 1}: буква '{letter}'")
-#     letter_positions = results['result_dict']
-#     used_letters_no_position = results['yes_list']
-#     unused_letters = results['no_list']
-#     # исключаю попадения угаданный букв в коллекцию неиспользуемых букв
-#     unused_letters = unused_letters.difference(used_letters_no_position)
-#     possible_words = find_words_with_letters(letter_positions,
-#                                              unused_letters,
-#                                              used_letters_no_position,
-#                                              )
-#     print([word for word in possible_words])
 
 
 if __name__ == "__main__":

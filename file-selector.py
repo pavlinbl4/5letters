@@ -1,3 +1,7 @@
+"""
+Программа на PyQt6 для выбора файла на компьютере
+"""
+
 import sys
 
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QFileDialog, QVBoxLayout, QWidget
@@ -54,8 +58,8 @@ def get_file_path():
 
 # Пример использования:
 if __name__ == '__main__':
-    file_path = get_file_path()
-    if file_path:
-        print(f"Выбранный файл: {file_path}")
+    _file_path = get_file_path()
+    if _file_path:
+        print(f"Выбранный файл: {_file_path}")
     else:
         print("Файл не был выбран")

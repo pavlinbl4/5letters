@@ -60,8 +60,8 @@ if __name__ == '__main__':
     stop_kran = 1
     while stop_kran != ' ':
         new_letter_positions = check_new_word['result_dict']
-        new_unused_letters = check_new_word['no_list']
-        new_used_letters = check_new_word['yes_list']
+        new_unused_letters = check_new_word['no_set']
+        new_used_letters = check_new_word['yes_set']
 
         letter_positions.update(new_letter_positions)
 

@@ -42,42 +42,4 @@ def find_words_with_letters(letter_positions, unused_letters, used_letters_no_po
     return possible_words
 
 
-if __name__ == '__main__':
-
-    check_new_word = get_letter_settings()
-
-    # словарь угаданных с позицией букв
-    letter_positions = {}
-
-    # множество букв, которых не может быть в слове
-    unused_letters = set()
-
-    # множество букв, который есть в слове
-    used_letters_no_position = set()
-
-
-    # цикл для вызова графического интерфейса
-    stop_kran = 1
-    while stop_kran != ' ':
-        new_letter_positions = check_new_word['result_dict']
-        new_unused_letters = check_new_word['no_list']
-        new_used_letters = check_new_word['yes_list']
-
-        letter_positions.update(new_letter_positions)
-
-        unused_letters.update(new_unused_letters)
-
-        used_letters_no_position.update(new_used_letters)
-        unused_letters = unused_letters.difference(used_letters_no_position)
-
-        result = find_words_with_letters(letter_positions, unused_letters, used_letters_no_position)
-
-        print(f'{unused_letters  = }')
-        print(f'{used_letters_no_position = }')
-        print(f'{letter_positions = }')
-        print("ВОЗМОЖНЫЕ ВАРИАНТЫ СЛОВ")
-        print([word for word in result])
-        stop_kran = input('Чтоб продолжать нажмите любую клавишу\n'
-                          'Для остановки - введите пробел\n ')
-
-        check_new_word = get_letter_settings()
+# удален блок main

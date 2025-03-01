@@ -1,14 +1,25 @@
 import os
 
-input_file = "/Users/evgeniy/Documents/russian.txt"
-temp_file = "temp_utf8.txt"
+from PyQt5.QtWidgets import QApplication
 
-# Читаем и конвертируем
-with open(input_file, "r", encoding="windows-1251") as infile, \
-     open(temp_file, "w", encoding="utf-8") as outfile:
-    outfile.write(infile.read())
 
-# Заменяем оригинальный файл новым
-os.replace(temp_file, input_file)
+class FileTextEncoding:
+    def __init__(self):
+        self.encoding_utf = "utf-8"
+        self.encoding_win = "windows-1251"
 
-print(f"Файл {input_file} успешно перекодирован в UTF-8")
+    def encode(self, input_file):
+        # Читаем и конвертируем
+        with (open(input_file, "r", encoding=self.encoding_win) as infile,
+              open('temp_file.txt', "w", encoding=self.encoding_utf) as outfile):
+            outfile.write(infile.read())
+
+        # Заменяем оригинальный файл новым
+        os.replace('temp_file.txt', input_file)
+        # os.remove('temp_file.txt')
+        print(f"Файл {input_file} успешно перекодирован в UTF-8")
+
+
+if __name__ == '__main__':
+    FileTextEncoding().encode('/Users/evgeniy/Desktop/windows_encoding.txt')
+
